@@ -7,7 +7,6 @@ using Aamp.Security.Cryptography;
 using BymlLibrary.Extensions;
 using Nintendo.Aamp;
 using SarcLibrary;
-using SharpYaml.Tokens;
 
 namespace BotwShopDataUtil.Helpers
 {
