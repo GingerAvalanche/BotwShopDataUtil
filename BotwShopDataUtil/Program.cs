@@ -37,21 +37,26 @@ else
     fieldPath = Path.Combine(exe_path, "01007EF00011F001", "romfs", "Map", "MainField");
 }
 
+Console.WriteLine($"Generating ShopAreaInfo and SoldOut entries from map files...");
 if (Directory.Exists(fieldPath))
 {
-    Console.WriteLine($"Generating ShopAreaInfo and SoldOut entries from map files...");
     HelperFunctions.AddNpcAreasAndSaleItemEntriesFromMapFiles(fieldPath, npcAreas, saleItemEntries, filesUsed);
-    Console.WriteLine($"\nAdding ShopAreaInfo and SoldOut entries from vanilla map files...");
-    string vanillaFieldPath;
-    if (settings.WiiU)
-    {
-        vanillaFieldPath = Path.Combine(settings.dlcDir, "Map", "MainField");
-    }
-    else
-    {
-        vanillaFieldPath = Path.Combine(settings.dlcDirNx, "Map", "MainField");
-    }
-    HelperFunctions.AddNpcAreasAndSaleItemEntriesFromMapFiles(vanillaFieldPath, npcAreas, saleItemEntries, filesUsed);
+}
+else
+{
+    Console.Write("No map files found in mod.");
+}
+Console.WriteLine($"\nAdding ShopAreaInfo and SoldOut entries from vanilla map files...");
+string vanillaFieldPath;
+if (settings.WiiU)
+{
+    vanillaFieldPath = Path.Combine(settings.dlcDir, "Map", "MainField");
+}
+else
+{
+    vanillaFieldPath = Path.Combine(settings.dlcDirNx, "Map", "MainField");
+}
+HelperFunctions.AddNpcAreasAndSaleItemEntriesFromMapFiles(vanillaFieldPath, npcAreas, saleItemEntries, filesUsed);
 }
 
 string bootupPath;
@@ -94,22 +99,26 @@ else
     actorPath = Path.Combine(exe_path, "01007EF00011E000", "romfs", "Actor", "Pack");
 }
 
+Console.WriteLine("\nGenerating ShopAreaInfo entries from actors...");
 if (Directory.Exists(actorPath))
 {
-    Console.WriteLine("\nGenerating ShopAreaInfo entries from actors...");
     HelperFunctions.AddShopInfoEntriesFromActors(shopGameDataInfo, actorPath, npcAreas, filesUsed);
-    Console.WriteLine("\nAdding ShopAreaInfo entries from vanilla actors...");
-    string vanillaActorPath;
-    if (settings.WiiU)
-    {
-        vanillaActorPath = Path.Combine(settings.updateDir, "Actor", "Pack");
-    }
-    else
-    {
-        vanillaActorPath = Path.Combine(settings.gameDirNx, "Actor", "Pack");
-    }
-    HelperFunctions.AddShopInfoEntriesFromActors(shopGameDataInfo, vanillaActorPath, npcAreas, filesUsed);
 }
+else
+{
+    Console.Write("No actors found in mod.");
+}
+Console.WriteLine("\nAdding ShopAreaInfo entries from vanilla actors...");
+string vanillaActorPath;
+if (settings.WiiU)
+{
+    vanillaActorPath = Path.Combine(settings.updateDir, "Actor", "Pack");
+}
+else
+{
+    vanillaActorPath = Path.Combine(settings.gameDirNx, "Actor", "Pack");
+}
+HelperFunctions.AddShopInfoEntriesFromActors(shopGameDataInfo, vanillaActorPath, npcAreas, filesUsed);
 
 if (saleItemEntries.Count > 0)
 {
