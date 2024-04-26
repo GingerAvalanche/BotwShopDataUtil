@@ -55,23 +55,31 @@ if (Directory.Exists(fieldPath))
 }
 
 string bootupPath;
+string backupPath;
 string vanillaBootupPath;
 
 if (settings.WiiU)
 {
     vanillaBootupPath = Path.Combine(settings.gameDir, "Pack", "Bootup.pack");
     bootupPath = Path.Combine(exe_path, "content", "Pack", "Bootup.pack");
+    backupPath = Path.Combine(exe_path, "content", "Pack", "Bootup.pack.bak");
 }
 else
 {
     vanillaBootupPath = Path.Combine(settings.gameDirNx, "Pack", "Bootup.pack");
     bootupPath = Path.Combine(exe_path, "01007EF00011E000", "romfs", "Pack", "Bootup.pack");
+    backupPath = Path.Combine(exe_path, "01007EF00011E000", "romfs", "Pack", "Bootup.pack.bak");
 }
 if (!File.Exists(bootupPath))
 {
     Directory.CreateDirectory(Directory.GetParent(bootupPath)!.FullName);
     File.Copy(vanillaBootupPath, bootupPath);
 }
+if (File.Exists(backupPath))
+{
+    File.Delete(backupPath);
+}
+File.Copy(bootupPath, backupPath);
 
 Sarc bootup = Sarc.FromBinary(File.ReadAllBytes(bootupPath));
 Info shopGameDataInfo = new();
@@ -136,7 +144,7 @@ bootup["GameData/ShopGameDataInfo.sbyml"] = Yaz0.Compress(shopGameDataInfo.ToBym
 using (MemoryStream ms = new())
 {
     bootup.Write(ms);
-    bootupPath = Path.Combine(exe_path, "content", "Pack", "Bootup_New.pack");
+    bootupPath = Path.Combine(exe_path, "content", "Pack", "Bootup.pack");
     File.WriteAllBytes(bootupPath, ms.ToArray());
 }
 
