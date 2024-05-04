@@ -7,7 +7,7 @@ namespace EveryFileExplorer
     {
         public const uint MAGIC = 0x307A6159;
 
-        public static unsafe byte[] Compress(byte[] Data, int level = 3, UInt32 reserved1 = 0, UInt32 reserved2 = 0)
+        public static unsafe byte[] Compress(byte[] Data, int level = 7, UInt32 reserved1 = 0, UInt32 reserved2 = 0)
         {
             int maxBackLevel = (int)(0x10e0 * (level / 9.0) - 0x0e0);
 
