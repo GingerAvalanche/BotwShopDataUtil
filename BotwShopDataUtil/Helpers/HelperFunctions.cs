@@ -1,12 +1,12 @@
 ﻿using BotwShopDataUtil.ShopGameData;
 using BymlLibrary.Nodes.Immutable.Containers;
 using BymlLibrary;
-using CsYaz0;
 using Revrs;
 using Aamp.Security.Cryptography;
 using BymlLibrary.Extensions;
 using Nintendo.Aamp;
 using SarcLibrary;
+using EveryFileExplorer;
 
 namespace BotwShopDataUtil.Helpers
 {

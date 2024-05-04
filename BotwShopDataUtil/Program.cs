@@ -1,9 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BotwShopDataUtil.Helpers;
 using BotwShopDataUtil.ShopGameData;
-using CsYaz0;
 using SarcLibrary;
 using BotwShopDataUtil;
+using EveryFileExplorer;
 
 string exe_path = AppContext.BaseDirectory;
 Settings settings = Settings.Load();
@@ -57,7 +57,6 @@ else
     vanillaFieldPath = Path.Combine(settings.dlcDirNx, "Map", "MainField");
 }
 HelperFunctions.AddNpcAreasAndSaleItemEntriesFromMapFiles(vanillaFieldPath, npcAreas, saleItemEntries, filesUsed);
-}
 
 string bootupPath;
 string backupPath;
